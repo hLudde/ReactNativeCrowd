@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Image, TextInput, Button, ImageBackground } from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 
 let username;
 let password;
 
 const styles = StyleSheet.create({
+  main:{
+    opacity: 0.9,
+    backgroundColor: "#024757",
+    flex: 1
+  },
+  logoDiv:{
+    flex: 1,
+    alignItems:'center'
+  },
+  logoImage:{
+    flex: 1,
+    resizeMode:'contain',
+    width:"100%"
+  },
   black:{
     backgroundColor: '#36382E'
   },
@@ -67,34 +81,22 @@ class Password extends Component {
 }
 export default class Crowd extends Component {
   render() {
-    let pic = {
-      uri: "https://lh3.googleusercontent.com/7IL0Ra3uJgLV5sVbHaxCxmbByVDC8qpbzgbh9ouV5HtOafO4npW_edf6w6Kb4tv5xzEJkWExJQgls2Xd8XVtZM_7O9TTUzd0vOJAk1WgMvCTPiYcekpA5LsqL5FB8EcFoPyg0bU3Ode_cMfFcf_GwYq6Zu8OlLAYbPQ3EzwCuhhfsR0MFzNUrbBekisMBMjN6Jh9i4zKdvd9Ik8qP3aq0T_Y6QZrWpg3QtQfNi2NJ4tNtz9_V8ye36g7bTbVO74exb82FWYifb27dxi2j8_ywYC6clsLltTI3i_WkxjvYMsXrXW5xJlmy9XTL-CYjxIA92hdDVcezs9uDKSXz2yuxQ9Vhi5BwVK_-LArCfdl5I-9uyuuawxlXF7ZQ5PcWZ_MjDbUCQ4VMXRw_2GyuqTEf_MkbM2SI2NMtfesxAfrK2skX2Aip1JGow2noU08cvKs6j6zK9gY_ergF7pqRjt81Yi9Jc6htnVTXg5TWJ1ZXBqQ0tGyUFfkA0aT8ziY-5RJv3tiHrOwV9U9LjhGIRcdXU9evkJHX0tH7ReUGOZAaBI5aeC7GLE0B9Ub0lgYVOG3pcH2NAMzIFN8JyRyS2w2eSwcRkocaxna=w2000-h2500"
-    };
     return (
-      <View style={[styles.black,{flex:1},{alignItems:'center'}]}>
-        <View style={{flex:1}}>
-          <Image source={pic} style={[{width:200, height: 60}, {resizeMode:'center'}, {top:50}]}></Image>
-        </View>
-        <View style={{flex:1}}>
-          <Username/>
-          <Password/>
-        </View>
-        <View style={{flex:1}}>
-          <Button title="Sign in" onPress={this.signIn}/>
-          <Button title="Sign up" onPress={signUp}/>
-        </View>
-      </View>
+      <ImageBackground source={require("../assets/appbilde7.png")} style={styles.main}>
+          <View style={styles.logoDiv}>
+            <Image source={require("../assets/crowd_logo.png")} style={styles.logoImage}></Image>
+          </View>
+          <View style={{flex:1}}>
+            <Button title="Logg Inn" onPress={this.signIn}/>
+            <Button title="Ny Bruker" onPress={this.signUp}/>
+          </View>
+      </ImageBackground>
     );
   }
-  signIn = async () => {
-    this.props.navigation.navigate('User', {username: username});/*
-    const {navigate} = object.props.navigation;
-    navigate('Profile', {username: "Hans Ludvig"})
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(json => alert(json.title))*/
+  signIn = () => {
+    this.props.navigation.navigate('login');
   }
-}
-function signUp(){
-  alert("Welcome 😄😄😄");
+  signUp = () => {
+    this.props.navigation.navigate('signUp');
+  }
 }

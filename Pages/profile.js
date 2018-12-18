@@ -12,13 +12,13 @@ export default class Profile extends Component {
         return (
         <View style={[styles.black,{flex:1},{alignItems:'center'}]}>
             <View style={{flex:1}}>
-            <Image source={pic} style={[{width:200, height: 60}, {resizeMode:'center'}, {top:50}]}></Image>
+              <Image source={pic} style={[{width:200, height: 60}, {resizeMode:'center'}, {top:50}]}></Image>
+            </View>
+            <View style={[{flex:1}]}>
+              <Text style={{color:'white'}}>Hello {this.props.navigation.state.params.username}!</Text>
             </View>
             <View style={{flex:1}}>
-            <Text>Hello {this.props.navigation.state.params.username}!</Text>
-            </View>
-            <View style={{flex:1}}>
-            <Button title="Sign out" onPress={()=>this.props.navigation.goBack()}/>
+              <Button title="Sign out" onPress={()=>this.props.navigation.goBack()}/>
             </View>
         </View>
         );
