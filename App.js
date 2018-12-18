@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
 import AnimatedBar from "react-native-animated-bar";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 export default class App extends React.Component {
     state = {
@@ -53,7 +54,24 @@ export default class App extends React.Component {
         );
     }
 }
+import Crowd from "./Pages/home";
+import Profile from "./Pages/profile";
+import Login from "./Pages/login";
+import SignUp from "./Pages/signUp";
 
+const App = createStackNavigator(
+  {
+    home: {screen: Crowd},
+    login: {screen: Login},
+    user: {screen: Profile},
+    signUp: {screen: SignUp}
+  },
+  {
+    defaultNavigationOptions:{
+      header:null
+    }
+  }
+);
 
 const textStyle = StyleSheet.create({
     overText: {
@@ -94,3 +112,5 @@ const barStyle = StyleSheet.create({
         padding: 20,
     },
 });
+
+export default createAppContainer(App);
