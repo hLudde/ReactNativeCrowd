@@ -1,21 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hans Ludvig er best</Text>
-      </View>
-    );
-  }
-}
+import Crowd from "./Pages/home";
+import Profile from "./Pages/profile";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#00eeff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const App = createStackNavigator(
+  {
+    Home: {screen: Crowd},
+    User: {screen: Profile}
   },
-});
+  {
+    defaultNavigationOptions:{
+      header:null
+    }
+  }
+);
+
+export default createAppContainer(App);
