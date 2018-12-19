@@ -48,7 +48,21 @@ const styles = StyleSheet.create({
     margin: 5,
     borderColor: 'gray',
     borderWidth: 1
-  }
+  },
+    buttonView2: {
+        borderWidth: 0.5,
+        borderRadius: 4,
+        height: 40,
+        flexDirection: 'column',
+        backgroundColor: 'turquoise',
+    },
+    flexContaier: {
+        borderRadius: 4,
+        flexDirection: 'column',
+        backgroundColor: 'turquoise',
+        margin: 70,
+        height: 40,
+    }
 })
 
 class Username extends Component {
@@ -86,10 +100,21 @@ export default class Crowd extends Component {
           <View style={styles.logoDiv}>
             <Image source={require("../assets/crowd_logo.png")} style={styles.logoImage}></Image>
           </View>
-          <View style={{flex:1}}>
-            <Button title="Logg Inn" onPress={this.signIn}/>
-            <Button title="Ny Bruker" onPress={this.signUp}/>
+        <View>
+          <View style={styles.flexContaier}>
+            <Button
+                title="Logg Inn"
+                color="white"
+                onPress={this.signIn}/>
+          <View style={styles.buttonView2}>
+            <Button
+                title="Ny Bruker"
+                color="white"
+                onPress={this.signUp}/>
           </View>
+        </View>
+        </View>
+
       </ImageBackground>
     );
   }

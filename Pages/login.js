@@ -97,7 +97,7 @@ export default class Login extends Component {
       .then(Response => Response.json())
       .then(json => {
         if(json[0]){
-          this.props.navigation.navigate('User',{username: json[0].name})
+          this.props.navigation.navigate('profilePage',{username: json[0].name})
         }else{
           alert("Could not sign in with the username and password, please try again")
         }
