@@ -2,41 +2,54 @@ package restAPI;
 
 public class Greeting {
 
-    private final long id;
-    private final String content;
-    private final String a;
-    private final String b;
-    private final String c;
-    private final String d;
-    private final String e;
+    private final long UUID;
+    private String Username;
+    private String Firstname;
+    private String Lastname;
+    private String Phonenumber;
+    private String Email;
+    private String School;
+    private String Password;
+    private long Currency;
 
 
-    public Greeting(long id, String content, String a, String b, String c, String d, String e) {
-        this.id = id;
-        this.content = content;
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-        this.e = e;
+    public Greeting(long UUID, String Username, String Firstname, String Lastname, String Phonenumber, String Email, String School, String Password, long Currency) {
+        this.UUID = UUID;
+        this.Username = Username;
+        this.Firstname = Firstname;
+        this.Lastname = Lastname;
+        this.Phonenumber = Phonenumber;
+        this.Email = Email;
+        this.Password = Password;
+        this.School = School;
+        this.Currency = Currency;
     }
 
-    public long getId() {
-        return id;
+    public long getUUID() {
+        return UUID;
     }
-    public String getA() {
-        return a;
+    public String getUsername() {
+        return Username;
     }
-    public String getB() {
-        return b;
+    public String getFirstname() {
+        return Firstname;
     }
-    public String getC() {
-        return c;
+    public String getLastname() {
+        return Lastname;
     }
-    public String getD() {
-        return d;
+    public String getPhonenumber() {
+        return Phonenumber;
     }
-    public String getE() {
-        return e;
+    public String getEmail() {
+        return Email;
+    }
+    public String getPassword() {
+        return Password;
+    }
+    public String getSchool() {
+        return School;
+    }
+    public long getCurrency() {
+        return Currency;
     }
 }
