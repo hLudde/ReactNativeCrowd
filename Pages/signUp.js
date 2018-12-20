@@ -3,11 +3,50 @@ import { StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from '
 import {createStackNavigator} from 'react-navigation';
 
 let username;
+let name;
+let dateofbirth;
 let password;
 
 const styles = StyleSheet.create({
-  black:{
-    backgroundColor: '#36382E'
+  main:{
+    backgroundColor: "#F8F7F5",
+    flex: 1,
+    alignItems:'center'
+  },
+  mainImage:{
+    opacity: 0.6
+  },
+  logoDiv:{
+    flex: 1,
+    alignItems:'center'
+  },
+  logoImage:{
+    flex: 1,
+    resizeMode:'contain',
+    width: 250
+  },
+  buttonContainer:{
+    flex: 1,
+    width: "50%",
+    alignItems: 'center'
+  },
+  buttonText:{
+    fontSize: 20,
+    color: 'black'
+  },
+  button:{
+    margin: 2,
+    paddingTop: 7,
+    paddingBottom: 7,
+    alignItems:'center',
+    backgroundColor: '#00A2AD',
+    width: "100%"
+  },
+  whitespace:{
+    flex: 1
+  }
+  /*black:{
+    backgroundColor: '#F8F7F5'
   },
   red:{
     backgroundColor: '#F06449'
@@ -34,7 +73,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderColor: 'gray',
     borderWidth: 1
-  }
+  }*/
 })
 
 class Username extends Component {
@@ -45,8 +84,7 @@ class Username extends Component {
   render() {
     return (
         <View>
-          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); username=text}}
-        value={this.state.placeholder} placeholder="username"/>
+          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); username=text}} value={this.state.placeholder} placeholder="username"/>
         </View>
     );
   }
@@ -59,8 +97,7 @@ class Password extends Component {
   render() {
     return (
         <View>
-          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); password=text}}
-        value={this.state.placeholder} placeholder="password" secureTextEntry={true}/>
+          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); password=text}} value={this.state.placeholder} placeholder="password" secureTextEntry={true}/>
         </View>
     );
   }
@@ -81,7 +118,7 @@ export default class SignUp extends Component {
         </View>
         <View style={{flex:1}}>
           <Button title="Sign in" onPress={this.signIn}/>
-          <Button title="Sign up" onPress={signUp}/>
+          <Button title="Return" onPress={this.return}/>
         </View>
       </View>
     );
@@ -108,6 +145,9 @@ export default class SignUp extends Component {
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(json => alert(json.title))*/
+  }
+  return = () => {
+    this.props.navigation.goBack();
   }
 }
 function signUp(){

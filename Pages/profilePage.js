@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Button} from 'react-native';
 
 import AnimatedBar from "react-native-animated-bar";
 
@@ -23,7 +23,7 @@ export default class profilePage extends React.Component {
         return (
             <View>
                 <Text style={textStyle.overText}>-Min Profil-</Text>
-                <Text style={textStyle.underText}>-Navn-</Text>
+                <Text style={textStyle.underText}>{this.props.navigation.state.params.username}</Text>
 
                 <View style={imgStyle.imgPos}>
                     <Image style={imgStyle.image}
@@ -48,9 +48,12 @@ export default class profilePage extends React.Component {
                     <Text style={textStyle.underText}> Over 1251 XP til neste nivå </Text>
                     <Text style={textStyle.underText}>Min Achievements</Text>
                 </View>
-
+                <Button title="Return" onPress={this.return}/>
             </View>
         );
+    }
+    return = () => {
+        this.props.navigation.goBack();
     }
 }
 

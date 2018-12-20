@@ -1,120 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TextInput, Button, ImageBackground } from 'react-native';
-import {createStackNavigator} from 'react-navigation';
+import { StyleSheet, View, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-let username;
-let password;
-
-const styles = StyleSheet.create({
-  main:{
-    opacity: 0.9,
-    backgroundColor: "#024757",
-    flex: 1
-  },
-  logoDiv:{
-    flex: 1,
-    alignItems:'center'
-  },
-  logoImage:{
-    flex: 1,
-    resizeMode:'contain',
-    width:"100%"
-  },
-  black:{
-    backgroundColor: '#36382E'
-  },
-  red:{
-    backgroundColor: '#F06449'
-  },
-  white:{
-    backgroundColor: '#EDE6E3'
-  },
-  font:{
-    fontSize:100,
-    color: 'orange'
-  },
-  TextInputForm:{
-    backgroundColor: "#EDE6E3",
-    width: 300,
-    height: 40,
-    margin: 5,
-    borderColor: 'gray',
-    borderWidth: 1
-  },
-  PasswordInputForm:{
-    backgroundColor: "#EDE6E3",
-    width: 300,
-    height: 40,
-    margin: 5,
-    borderColor: 'gray',
-    borderWidth: 1
-  },
-    buttonView2: {
-        borderWidth: 0.5,
-        borderRadius: 4,
-        height: 40,
-        flexDirection: 'column',
-        backgroundColor: 'turquoise',
-    },
-    flexContaier: {
-        borderRadius: 4,
-        flexDirection: 'column',
-        backgroundColor: 'turquoise',
-        margin: 70,
-        height: 40,
-    }
-})
-
-class Username extends Component {
-  constructor(props){
-    super(props);
-    this.state = { placeholder: this.props.placeholder };
-  }
-  render() {
-    return (
-        <View>
-          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); username=text}}
-        value={this.state.placeholder} placeholder="username"/>
-        </View>
-    );
-  }
-}
-class Password extends Component {
-  constructor(props){
-    super(props);
-    this.state = { placeholder: this.props.placeholder };
-  }
-  render() {
-    return (
-        <View>
-          <TextInput style={styles.TextInputForm} onChangeText={(text) => {this.setState({text}); password=text}}
-        value={this.state.placeholder} placeholder="password" secureTextEntry={true}/>
-        </View>
-    );
-  }
-}
 export default class Crowd extends Component {
   render() {
+    let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
+    ws.onopen = () =>{
+      console.log("I am now connected to "+ws.url);
+    }
+    ws.onmessage = (message) => {
+      console.log(message.data);
+    }
     return (
-      <ImageBackground source={require("../assets/appbilde7.png")} style={styles.main}>
-          <View style={styles.logoDiv}>
-            <Image source={require("../assets/crowd_logo.png")} style={styles.logoImage}></Image>
-          </View>
-        <View>
-          <View style={styles.flexContaier}>
-            <Button
-                title="Logg Inn"
-                color="white"
-                onPress={this.signIn}/>
-          <View style={styles.buttonView2}>
-            <Button
-                title="Ny Bruker"
-                color="white"
-                onPress={this.signUp}/>
-          </View>
+      <ImageBackground source={require("../assets/appbilde7.png")} style={styles.main} imageStyle={styles.mainImage}>
+        <View style={styles.logoDiv}>
+          <Image source={require("../assets/crowd_logo.png")} style={styles.logoImage}></Image>
         </View>
+        <View style={styles.whitespace}></View>
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={this.signIn}><Text style={styles.buttonText}>Logg Inn</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.signUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
         </View>
-
       </ImageBackground>
     );
   }
@@ -125,3 +30,42 @@ export default class Crowd extends Component {
     this.props.navigation.navigate('signUp');
   }
 }
+const styles = StyleSheet.create({
+  main:{
+    backgroundColor: "#F8F7F5",
+    flex: 1,
+    alignItems:'center'
+  },
+  mainImage:{
+    opacity: 0.6
+  },
+  logoDiv:{
+    flex: 1,
+    alignItems:'center'
+  },
+  logoImage:{
+    flex: 1,
+    resizeMode:'contain',
+    width: 250
+  },
+  buttonContainer:{
+    flex: 1,
+    width: "50%",
+    alignItems: 'center'
+  },
+  buttonText:{
+    fontSize: 20,
+    color: 'black'
+  },
+  button:{
+    margin: 2,
+    paddingTop: 7,
+    paddingBottom: 7,
+    alignItems:'center',
+    backgroundColor: '#00A2AD',
+    width: "100%"
+  },
+  whitespace:{
+    flex: 1
+  }
+})
