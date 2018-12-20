@@ -81,7 +81,7 @@ export default class Login extends Component {
         </View>
         <View style={{flex:1}}>
           <Button title="Sign in" onPress={this.signIn}/>
-          <Button title="Sign up" onPress={signUp}/>
+          <Button title="Return" onPress={this.signUp}/>
         </View>
       </View>
     );
@@ -109,7 +109,7 @@ export default class Login extends Component {
       .then(response => response.json())
       .then(json => alert(json.title))*/
   }
-}
-function signUp(){
-  alert("Welcome 😄😄😄");
+  signUp = () =>{
+    this.props.navigation.goBack();
+  }
 }
