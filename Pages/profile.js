@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1
   }
-})
+});
 function signOut(){
   alert("goodbye ;(")
 }
