@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1
   }
-})
+});
 
 class Username extends Component {
   constructor(props){
