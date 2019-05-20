@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
  import React from "react";
  import { GiftedChat } from "react-native-gifted-chat";
  import io from 'socket.io-client';
+//import console = require("console");
  
 
 
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
       super(props);
       this.socket = io('http://10.32.9.69:8080');
       this.socket.on('message',(msg)=>{
+        console.log(msg);
         this.setState(previousState => ({
           messages: GiftedChat.append(previousState.messages, msg)
         }));
@@ -106,6 +108,12 @@ const styles = StyleSheet.create({
      });
    }
  
+   onRecieve(messages = []){
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
+  }
+
    onSend(messages = []) {
      this.socket.emit('message', messages);
      this.setState(previousState => ({
@@ -116,14 +124,16 @@ const styles = StyleSheet.create({
 
  
    render() {
+    
      return (
        <GiftedChat
          messages={this.state.messages}
          onSend={messages => this.onSend(messages)}
          user={{
-           _id: 1
+           _id: 1 // Change to username when we have that
          }}
        />
+
      );
    }
  }
