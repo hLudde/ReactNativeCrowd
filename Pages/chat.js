@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
 
  import React from "react";
  import { GiftedChat } from "react-native-gifted-chat";
- import SocketIOClient from 'socket.io-client';
+ import io from 'socket.io-client';
  
  export default class Chat extends React.Component {
     constructor(props){
       super(props);
-      this.socket = SocketIOClient.Socket.connect('http://10.32.9.1:8080');
+      this.socket = io('http://10.32.9.69:8080');
     }
    state = {
      messages: []
