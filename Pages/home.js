@@ -24,7 +24,7 @@ export default class Crowd extends Component {
     );
   }
   signIn = () => {
-    this.props.navigation.navigate('login');
+    this.props.navigation.navigate('chat');
   }
   signUp = () => {
     this.props.navigation.navigate('signUp');
