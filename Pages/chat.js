@@ -71,10 +71,17 @@ const styles = StyleSheet.create({
  import { GiftedChat } from "react-native-gifted-chat";
  import io from 'socket.io-client';
  
+
+
  export default class Chat extends React.Component {
     constructor(props){
       super(props);
       this.socket = io('http://10.32.9.69:8080');
+      this.socket.on('message',(msg)=>{
+        this.setState(previousState => ({
+          messages: GiftedChat.append(previousState.messages, msg)
+        }));
+      })
     }
    state = {
      messages: []
