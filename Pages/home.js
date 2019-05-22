@@ -19,15 +19,19 @@ export default class Crowd extends Component {
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this.signIn}><Text style={styles.buttonText}>Logg Inn</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={this.signUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.TEMPChat}><Text style={styles.buttonText}>TEMP Chat</Text></TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ImageBackground> 
     );
   }
   signIn = () => {
-    this.props.navigation.navigate('chat');
+    this.props.navigation.navigate('signIn');
   }
   signUp = () => {
     this.props.navigation.navigate('signUp');
+  }
+  TEMPChat = () => {
+    this.props.navigation.navigate('chat');
   }
 }
 const styles = StyleSheet.create({
