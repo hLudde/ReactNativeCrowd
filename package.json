@@ -9,10 +9,11 @@
   "dependencies": {
     "expo": "^31.0.2",
     "react": "16.5.0",
+    "react-dom": "^16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-animated-bar": "^0.2.0",
-    "react-navigation": "^3.0.8",
-    "react-dom": "^16.5.0"
+    "react-native-card-stack-swiper": "^1.1.0",
+    "react-navigation": "^3.0.8"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",

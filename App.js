@@ -9,6 +9,7 @@ import Profile from "./Pages/profile";
 import Login from "./Pages/login";
 import SignUp from "./Pages/signUp";
 import ProfilePage from "./Pages/profilePage";
+import Swiper from "./Pages/swipe";
 
 const App = createStackNavigator(
   {
