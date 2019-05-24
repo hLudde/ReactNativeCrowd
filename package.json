@@ -4,8 +4,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject",
-    "test": "jest"
+    "eject": "expo eject"
   },
   "dependencies": {
     "expo": "^31.0.2",
@@ -13,7 +12,10 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-animated-bar": "^0.2.0",
     "react-navigation": "^3.0.8",
-    "react-dom": "^16.5.0"
+    "react-dom": "^16.5.0",
+    "react-native-gifted-chat": "^0.8.2",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "enzyme": "^3.3.0",

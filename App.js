@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+//import socketIOClient from './node_modules/socket.io-client';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 
@@ -9,6 +9,7 @@ import Profile from "./Pages/profile";
 import Login from "./Pages/login";
 import SignUp from "./Pages/signUp";
 import ProfilePage from "./Pages/profilePage";
+import Chat from "./Pages/chat";
 
 const App = createStackNavigator(
   {
@@ -16,7 +17,8 @@ const App = createStackNavigator(
     login: {screen: Login},
     user: {screen: Profile},
     signUp: {screen: SignUp},
-    profilePage: {screen:ProfilePage}
+    profilePage: {screen:ProfilePage},
+    chat: {screen: Chat}
   },
   {
     defaultNavigationOptions:{

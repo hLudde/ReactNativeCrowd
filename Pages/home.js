@@ -3,8 +3,7 @@ import { StyleSheet, View, Image, Text, ImageBackground, TouchableOpacity } from
 
 export default class Crowd extends Component {
   render() {
-    //let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
-    let ws = new WebSocket("ws://10.32.14.56:8080", "TCP")
+    let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
     ws.onopen = () =>{
       console.log("I am now connected to "+ws.url);
     }
@@ -20,8 +19,9 @@ export default class Crowd extends Component {
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this.signIn}><Text style={styles.buttonText}>Logg Inn</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={this.signUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.TEMPChat}><Text style={styles.buttonText}>TEMP Chat</Text></TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ImageBackground> 
     );
   }
   signIn = () => {
@@ -29,6 +29,9 @@ export default class Crowd extends Component {
   }
   signUp = () => {
     this.props.navigation.navigate('signUp');
+  }
+  TEMPChat = () => {
+    this.props.navigation.navigate('chat');
   }
 }
 const styles = StyleSheet.create({
