@@ -91,16 +91,28 @@ export default class Login extends Component {
       alert("Could not sign in with the username and password, please try again")
       return;
     }
-    let prepareUrl = "https://jsonplaceholder.typicode.com/users?id="+password+"&username="+username;
+    //let prepareUrl = "https://jsonplaceholder.typicode.com/users?id="+password+"&username="+username;
+    let prepareUrl = "10.32.9.56:8080/login";
     console.log(prepareUrl)
-    await fetch(prepareUrl)
-      .then(Response => Response.json())
+    await fetch(prepareUrl,{
+      method: 'POST',
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({
+        "username": username,
+        "password": password
+      })
+    }).then(Response => Response.json())
       .then(json => {
-        if(json[0]){
+        console.log(json);
+        /*if(json[0]){
           this.props.navigation.navigate('profilePage',{username: json[0].name})
         }else{
           alert("Could not sign in with the username and password, please try again")
-        }
+        }*/
+      }).catch((err)=>{
+        console.log(err);
       })
     //this.props.navigation.navigate('User', {username: username});
     /*const {navigate} = object.props.navigation;

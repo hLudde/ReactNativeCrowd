@@ -3,7 +3,8 @@ import { StyleSheet, View, Image, Text, ImageBackground, TouchableOpacity } from
 
 export default class Crowd extends Component {
   render() {
-    let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
+    //let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
+    let ws = new WebSocket("ws://10.32.14.56:8080", "TCP")
     ws.onopen = () =>{
       console.log("I am now connected to "+ws.url);
     }
