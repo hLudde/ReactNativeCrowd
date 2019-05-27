@@ -120,7 +120,7 @@ export default class Login extends Component {
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(json => alert(json.title))*/
-      this.props.navigation.navigate('chat');
+      this.props.navigation.navigate('chat'); // ---TEMP---
   }
   signUp = () =>{
     this.props.navigation.goBack();
