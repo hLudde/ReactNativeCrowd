@@ -18,16 +18,16 @@ export default class Crowd extends Component {
         <View style={styles.whitespace}></View>
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={this.signIn}><Text style={styles.buttonText}>Logg Inn</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={this.signUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.doSignUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
         </View>
       </ImageBackground>
     );
   }
   signIn = () => {
-    this.props.navigation.navigate('login');
-  }
-  signUp = () => {
-    this.props.navigation.navigate('signUp');
+    this.props.navigation.navigate('auth/login');
+  };
+  doSignUp = () => {
+    this.props.navigation.navigate('auth/signup');
   }
 }
 const styles = StyleSheet.create({
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   buttonText:{
     fontSize: 20,
-    color: 'black'
+    color: 'black',
   },
   button:{
     margin: 2,

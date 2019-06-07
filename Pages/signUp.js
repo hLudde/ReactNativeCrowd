@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1
   }*/
-})
+});
 
-class Username extends Component {
+export class Username extends Component {
   constructor(props){
     super(props);
     this.state = { placeholder: this.props.placeholder };

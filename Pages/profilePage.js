@@ -1,98 +1,91 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image, Button} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, Image, Button, TouchableOpacity} from 'react-native';
+import {LinearGradient} from 'expo';
 
-import AnimatedBar from "react-native-animated-bar";
+const styles = StyleSheet.create({
+    parentView: {
+        marginTop: 25,
+    },
+    submitButton: {
+        backgroundColor: '#024757',
+        padding: 10,
+        margin: 10,
+        height: 60,
+        width: 200,
+        marginLeft: 65,
+        alignContent: 'center',
+        justifyContent:'center',
+        borderRadius: 60/2,
+        marginTop: 60,
+    },
+    backText: {
+        paddingTop: 20,
+        color: '#b0c4de',
+        textAlign: 'center'
+    },
+    submitButtonText: {
+        color: 'white',
+        textAlign: 'center',
+    },
+});
+const textStyle = StyleSheet.create({
+    overText: {
+        color: 'white',
+        fontSize: 25,
+        textAlign: 'center',
+        justifyContent: 'space-between',
+        padding: 20,
 
-export default class profilePage extends React.Component {
-    state = {
-        progress: 0,
-    };
+    },
+});
+const imgStyle = StyleSheet.create({
+    image: {
+        height: 180,
+        width: 180,
+    },
+    imgPos: {
+        alignItems: 'center',
+        marginTop: 25,
+    },
+});
 
-    componentDidMount() {
-        const interval = setInterval(() => {
-            if (this.state.progress > 0.9) return clearInterval(interval);
-            this.setState(state => {
-                return {
-                    progress: state.progress + 0.1, // incrementer med antall xp for faen
-                };
-            });
-        }, 1000);
+export default class profilePage extends Component {
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (
-            <View>
-                <Text style={textStyle.overText}>-Min Profil-</Text>
-                <Text style={textStyle.underText}>{this.props.navigation.state.params.username}</Text>
+            <LinearGradient
+                colors={['#024757', '#00c5d0']}
+                start={{x: 1, y: 0}}
+                end={{x: 0, y: 1}}
+                style={{flex: 1}}>
+                <View style={[styles.parentView]}>
 
-                <View style={imgStyle.imgPos}>
-                    <Image style={imgStyle.image}
-                           source={require('../assets/avatar.png')}/>
-                </View>
+                    <Text style={textStyle.overText}> Brukernavn/navn </Text>
 
-                <View style={barStyle.bar}>
-                    <AnimatedBar
-                        progress={this.state.progress}
-                        height={20}
-                        borderColor="grey"
-                        fillColor="black"
-                        barColor="orange"
-                        borderRadius={5}
-                        borderWidth={5}
-                        duration={500}
-                    >
-                    </AnimatedBar>
-                </View>
+                    <View style={imgStyle.imgPos}>
+                        <Image style={imgStyle.image}
+                               source={require('../assets/avatar.png')}/>
+                    </View>
 
-                <View>
-                    <Text style={textStyle.underText}> Over 1251 XP til neste nivå </Text>
-                    <Text style={textStyle.underText}>Min Achievements</Text>
+                    <TouchableOpacity style={styles.submitButton} onPress={this.routeUpdateProfile}>
+                        <Text style={styles.submitButtonText}> OPPDATER PROFIL </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={this.routeHome}>
+                        <Text style={styles.backText}>Hjem</Text>
+
+                    </TouchableOpacity>
                 </View>
-                <Button title="Return" onPress={this.return}/>
-            </View>
+            </LinearGradient>
         );
     }
-    return = () => {
-        this.props.navigation.goBack();
-    }
+    routeUpdateProfile= () => {
+        this.props.navigation.navigate('home');
+    };
+    routeHome = () => {
+        this.props.navigation.navigate('updateProfile');
+    };
 }
-
-const textStyle = StyleSheet.create({
-    overText: {
-        color: 'black',
-        fontWeight: 'bold',
-        fontSize: 35,
-        textAlignVertical: 'top',
-        textAlign: 'center',
-        padding: 20,
-    },
-    underText: {
-        color: 'black',
-        fontSize: 25,
-        textAlign: 'center',
-        justifyContent: 'space-between',
-        padding: 10,
-    },
-});
-
-const imgStyle = StyleSheet.create({
-    image: {
-        height: 150,
-        borderRadius: 75,
-        width: 150,
-    },
-    imgPos: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-    },
-});
-
-const barStyle = StyleSheet.create({
-    bar: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-});
