@@ -24,10 +24,10 @@ export default class Crowd extends Component {
     );
   }
   signIn = () => {
-    this.props.navigation.navigate('auth/login');
+    this.props.navigation.navigate('login');
   };
   doSignUp = () => {
-    this.props.navigation.navigate('auth/signup');
+    this.props.navigation.navigate('signUp');
   }
 }
 const styles = StyleSheet.create({

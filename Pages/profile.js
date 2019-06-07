@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
 
 export default class Profile extends Component {

@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
 import {LinearGradient} from 'expo';
+import {api} from "../../App";
 
 const styles = StyleSheet.create({
     parentView: {
-        paddingTop: 130,
     },
     textInputStyle: {
         padding: 10, // placholder position
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         marginBottom: 30,
-        fontFamily: "./assets/fonts/Roboto-Bold.ttf"// "Roboto-Light"
+        //fontFamily: "./assets/fonts/Roboto-Bold.ttf"// "Roboto-Light"
     },
     star: {
         color: '#FF6347',
@@ -53,15 +53,14 @@ const styles = StyleSheet.create({
 export default class signup extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            username: '',
+            name: '',
+            email: '',
+            password: '',
+            confirm: '',
+        }
     }
-
-    state = {
-        username: '',
-        name: '',
-        email: '',
-        password: '',
-        confirm: '',
-    };
 
     handleUsername = text => {
         this.setState({ username: text });
@@ -90,7 +89,7 @@ export default class signup extends Component {
                 start={{ x: 1, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={{ flex: 1 }}>
-                <View style={[styles.parentView]}>
+                <ScrollView style={[styles.parentView]}>
                     <View style={{ flex: 1 }}>
                         <Image
                             source={pic}
@@ -173,36 +172,36 @@ export default class signup extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.routeHome}>
-                        <Text style={styles.backText}> Tilbake</Text>
+                        <Text style={styles.backText}> Hjem </Text>
                     </TouchableOpacity>
-                </View>
+                </ScrollView>
             </LinearGradient>
         );
     }
-    signUp = async () => {
-        const { username, email, password, confirm } = this.state;
-
-        if (
-            username === '' &&
-            password === '' &&
-            email === '' &&
-            confirm === '' &&
-            /\s/.test(username) &&
-            /\s/.test(password) &&
-            /\s/.test(password) &&
-            /\s/.test(email)
-        ) {
-            // NULL and whitspace check
-            return;
-        } else if (this.state.confirm !== this.state.password) {
-            // confirm and password match
-            return;
-        } else {
-            //login til home
-        }
+    signUp = () => {
+        const { username, email, password, name } = this.state;
+        return fetch('http://10.32.9.62/register',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+                "email": email,
+                "password": password,
+                "name": name,
+                "username":username
+            })
+        }).then((response)=>{
+            console.log(response);
+        }).catch((err)=>{
+            console.log(err);
+        })
     };
+
 
     routeHome = () => {
-        this.props.navigation.navigate('match');
+        this.props.navigation.navigate('home');
     };
+
+
 }

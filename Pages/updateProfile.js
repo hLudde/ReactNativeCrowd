@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React,{Component} from "react";
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
 import {LinearGradient} from 'expo';
 

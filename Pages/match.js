@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, {Component } from 'react';
 import {Animated, Dimensions, Image, StyleSheet, Text, View} from 'react-native'
 import {LinearGradient} from 'expo';
 import {Appbar} from 'react-native-paper';

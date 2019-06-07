@@ -1,36 +1,16 @@
-import React from 'react';
-
-
+import React, { Component } from 'react';
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
 import {createAppContainer, createStackNavigator, createDrawerNavigator} from 'react-navigation';
-
-
 import Crowd from "./Pages/home";
 import Profile from "./Pages/profile";
-import login from "./Pages/auth/login";
-import signup from "./Pages/auth/signup";
-//import profilePage from "./Pages/profilePage";
+import Login from "./Pages/auth/login";
+import SignUp from "./Pages/auth/signup";
 import Match from './Pages/match';
 import profilePage from './Pages/profilePage'
 import groups from './Pages/groups';
+import updateProfile from './Pages/updateProfile'
 
-
-const App = createStackNavigator(
-    {
-        home: {screen: Crowd},
-        signup: {screen: signup},
-        login: {screen: login},
-        user: {screen: Profile},
-        profilePage: {screen: profilePage},
-        match: {screen: Match}
-    },
-    {
-        defaultNavigationOptions: {
-            header: null
-        }
-    }
-);
-//export default createAppContainer(App);
-
+export const api = React.createContext("http://10.32.9.62/");
 // NAVIGATION DRAWER IN HEADER
 class NavigationDrawerStructure extends Component {
     toggleDrawer = () => {
@@ -96,6 +76,14 @@ const groups_StackNavigator = createStackNavigator({
 // sider som skal være med i stacken her
 const DrawerNavigator = createDrawerNavigator({
     //Drawer Optons og indexing
+    home: {
+        screen: Crowd,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }
+    },
     Match: {
         //Title
         screen: Match_StackNavigator,
@@ -115,7 +103,41 @@ const DrawerNavigator = createDrawerNavigator({
             drawerLabel: 'Mine Grupper',
         },
     },
+
+
+    login: {
+        screen: Login,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }
+    },
+    user: {
+        screen: Profile,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }},
+    signUp: {
+        screen: SignUp,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }},
+
+    updateProfile: {
+        screen:updateProfile,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }}
 });
 
 
 export default createAppContainer(DrawerNavigator);
+
+
