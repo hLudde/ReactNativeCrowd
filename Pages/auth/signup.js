@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
 import {LinearGradient} from 'expo';
-import {api} from "../../App";
 
 const styles = StyleSheet.create({
     parentView: {
@@ -179,21 +178,29 @@ export default class signup extends Component {
         );
     }
     signUp = () => {
-        const { username, email, password, name } = this.state;
-        return fetch('http://10.32.9.62/register',{
+        console.log("Hello world!");
+        return fetch('http://10.32.9.62:8080/register',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json',
             },
             body: JSON.stringify({
-                "email": email,
-                "password": password,
-                "name": name,
-                "username":username
+                "email": this.state.email,
+                "password": this.state.password,
+                "name": this.state.name,
+                "username":this.state.username
             })
-        }).then((response)=>{
-            console.log(response);
-        }).catch((err)=>{
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((responseJson)=>{
+            if(responseJson.success==true){
+                this.props.username = this.state.username;
+                this.props.navigation.navigate('login', { data: this.state});
+            }
+        })
+        .catch((err)=>{
             console.log(err);
         })
     };

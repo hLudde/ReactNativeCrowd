@@ -64,19 +64,18 @@ export default class login extends Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            username: '',
+            password: '',
+        };
     }
 
-    state = {
-        username: '',
-        password: ''
-    };
 
-
-    handleUsername = (event) => {
-        this.setState({username: event})
+    handleUsername = text => {
+        this.setState({username: text})
     };
-    handlePassword = (event) => {
-        this.setState({password: event})
+    handlePassword = text => {
+        this.setState({password: text})
     };
 
 
@@ -107,16 +106,16 @@ export default class login extends Component {
                         <Text style={[styles.loggInnStyle]}>Logg inn</Text>
                         <TextInput style={[styles.textInputStyle]}
                                    placeholder="Brukernavn"
-                                   value={this.state.username}
-                                   onChange={this.handleUsername}/>
+                                   value={this.state.placeholder}
+                                   onChangeText={this.handleUsername}/>
                     </View>
 
                     <View>
 
                         <TextInput secureTextEntry={true} style={[styles.textInputStyle]}
                                    placeholder="Passord"
-                                   value={this.state.password}
-                                   onChange={this.handlePassword}/>
+                                   value={this.state.placeholder}
+                                   onChangeText={this.handlePassword}/>
                     </View>
 
 
@@ -144,41 +143,30 @@ export default class login extends Component {
     }
 
     // Sign in method
-    signIn = async () => {
-
-        const {username, password} = this.state;
-
-        const url = "/api/login";
-
-        const payload = {username: username, password: password};
-
-        // NULL and whitspace check
-        if (username === "" && password === "" && /\s/.test(username) && /\s/.test(password)) {
-            return;
-        }else {
-            // Do sign in - login til home
-            let response;
-            try {
-                response = await fetch(url, {
-                    method: "post",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-            } catch (error) {
-                return;
+    signIn = () => {
+        return fetch('http://10.32.9.62:8080/login',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+                "password":this.state.password,
+                "username":this.state.username
+            })
+        })
+        .then((response)=>{
+            console.log(response);
+            return response.json()
+        })
+        .then((responseJson)=>{
+            if(responseJson.success==true){
+                this.state.token = responseJson.token;
+                this.props.navigation.navigate('Match', { data: this.state});
             }
-            if (response.status === 400) {
-                return; // Client error: invalid username/password
-            }
-            if (response.status !== 201) {
-                return; // Server error: error when connecting to server
-            }
-        }
-
-        await this.props.fetchAndUpdateUserInfo(); //hmm
-        this.props.history.push('/');
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
     };
 
     // routes

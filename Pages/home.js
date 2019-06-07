@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
 export default class Crowd extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     let ws = new WebSocket("ws://10.32.3.9:4141", "TCP")
     ws.onopen = () =>{

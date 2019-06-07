@@ -6,78 +6,89 @@ import {Appbar} from 'react-native-paper';
 import Swiper from 'react-native-swiper';
 import SlidingUpPanel from 'rn-sliding-up-panel'
 
+import SwipeCards from 'react-native-swipe-cards';
+
+class Card extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+  
+    render() {
+      return (
+        <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
+          <Text>{this.props.text}</Text>
+        </View>
+      )
+    }
+  }
+  
+  class NoMoreCards extends Component {
+    constructor(props) {
+      super(props);
+    }
+  
+    render() {
+      return (
+        <View>
+          <Text style={styles.noMoreCardsText}>No more cards</Text>
+        </View>
+      )
+    }
+  }
+
 export default class Match extends Component {
     constructor(props) {
-        super(props)
-    }
-    state = {
-        groupName: '',
-
-    };
-    //sliding up panel
-    static defaultProps = {
-        draggableRange: {
-            top: 550 / 1.75,
-            bottom: 120,
-        }
-    };
-
-    _draggedValue = new Animated.Value(120);
-
-    render() {
-        const {top, bottom} = this.props.draggableRange;
-
-        const draggedValue = this._draggedValue.interpolate({
-            inputRange: [bottom, top],
-            outputRange: [0, 1],
-            extrapolate: 'clamp',
-
-        });
+        super(props);
+        this.state = {
+          cards: [
+            {text: 'Tomato', backgroundColor: 'red'},
+            {text: 'Aubergine', backgroundColor: 'purple'},
+            {text: 'Courgette', backgroundColor: 'green'},
+            {text: 'Blueberry', backgroundColor: 'blue'},
+            {text: 'Umm...', backgroundColor: 'cyan'},
+            {text: 'orange', backgroundColor: 'orange'},
+          ]
+        };
+      }
+    
+      handleYup (card) {
+        console.log(`Yup for ${card.text}`)
+      }
+      handleNope (card) {
+        console.log(`Nope for ${card.text}`)
+      }
+      handleMaybe (card) {
+        console.log(`Maybe for ${card.text}`)
+      }
+      render() {
+        // If you want a stack of cards instead of one-per-one view, activate stack mode
+        // stack={true}
         return (
-            <LinearGradient
-                colors={['#024757', '#00c5d0']}
-                start={{x: 1, y: 0}}
-                end={{x: 0, y: 1}}
-                style={{flex: 1}}>
-                <View style={slidingStyle.container}>
-
-                    <Swiper style={swipperStyle.wrapper} showsPagination={false}>
-                        <View style={swipperStyle.slide1}>
-                            <Text style={swipperStyle.text}>Fisking</Text>
-                        </View>
-                        <View style={swipperStyle.slide2}>
-                            <Text style={swipperStyle.text}>Beautiful</Text>
-                        </View>
-                        <View style={swipperStyle.slide3}>
-                            <Text style={swipperStyle.text}>And simple</Text>
-                        </View>
-                    </Swiper>
-                </View>
-
-                <View style={slidingStyle.container}>
-                    <SlidingUpPanel
-                        showBackdrop={false}
-                        ref={c => (this._panel = c)}
-                        draggableRange={this.props.draggableRange}
-                        animatedValue={this._draggedValue}>
-                        <View style={slidingStyle.panel}>
-                            <View style={slidingStyle.panelHeader}>
-                                <Text style={{color: '#FFF'}}>Bottom Sheet Peek</Text>
-                            </View>
-                            <View style={slidingStyle.container}>
-                                <Text> Hello world </Text>
-                                <Text> Lenker til interesse grupper her</Text>
-                            </View>
-                        </View>
-                    </SlidingUpPanel>
-                </View>
-
-            </LinearGradient>
-        );
+          <SwipeCards
+            cards={this.state.cards}
+            renderCard={(cardData) => <Card {...cardData} />}
+            renderNoMoreCards={() => <NoMoreCards />}
+    
+            handleYup={this.handleYup}
+            handleNope={this.handleNope}
+            handleMaybe={this.handleMaybe}
+            hasMaybeAction
+          />
+        )
     }
-
+    
 }
-
+const styles = StyleSheet.create({
+    card: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 300,
+      height: 300,
+    },
+    noMoreCardsText: {
+      fontSize: 22,
+    }
+  })
 const swipperStyle= StyleSheet.create({
     wrapper: {
         shadowColor: "#000",
