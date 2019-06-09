@@ -144,7 +144,7 @@ export default class login extends Component {
 
     // Sign in method
     signIn = () => {
-        return fetch('http://10.32.9.62:8080/login',{
+        return fetch('http://192.168.1.10:8080/login',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -161,7 +161,23 @@ export default class login extends Component {
         .then((responseJson)=>{
             if(responseJson.success==true){
                 this.state.token = responseJson.token;
-                this.props.navigation.navigate('Match', { data: this.state});
+                fetch('http://192.168.1.10:8080/user/randominterest',{
+                    method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json',
+                    },
+                    body: JSON.stringify({
+                        "token": this.state.token,
+                        "username":this.state.username
+                    })
+                }).then((response)=>{
+                    return response.json();
+                }).then((responseJSON)=>{
+                    this.state.interest = responseJSON;
+                    this.props.navigation.navigate('Match', {data:this.state});
+                }).catch((err)=>{
+                    console.log(err);
+                })
             }
         })
         .catch((err)=>{

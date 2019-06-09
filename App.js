@@ -11,6 +11,7 @@ import groups from './Pages/groups';
 import updateProfile from './Pages/updateProfile'
 import gruppeDannet from './Pages/gruppeDannet'
 
+
 export const api = React.createContext("http://10.32.9.62/");
 // NAVIGATION DRAWER IN HEADER
 class NavigationDrawerStructure extends Component {
@@ -87,9 +88,15 @@ const DrawerNavigator = createDrawerNavigator({
         }
     },
     Match: {
-        screen: Match_StackNavigator,
+        screen: Match,
         navigationOptions: {
-            drawerLabel: 'Match',
+            title: 'Finn Interesser',
+            headerLeft: <NavigationDrawerStructure/>,
+            headerStyle: {
+                backgroundColor: '#FF9800',
+            },
+            headerTintColor: '#fff',
+            drawerLabel: 'Match'
         },
     },
     profilePage: {

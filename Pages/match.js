@@ -42,49 +42,245 @@ class NoMoreCards extends Component {
     }
 }
 
-export default class extends React.Component {
+export default class Match extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cards: [
-                {text: 'Tomat', backgroundColor: 'red'},
-                {text: 'Aubergine', backgroundColor: 'purple'},
-                {text: 'Appelsin', backgroundColor: 'orange'},
-            ]
-        };
+          data: this.props.navigation.state.params.data,
+          cards: [
+            {text: this.props.navigation.state.params.data.interest.Name, backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID},
+            {text: "", backgroundColor: 'purple', ID: this.props.navigation.state.params.data.interest.ID}
+          ]
+        }
     }
 
-    handleYup (card) {
-        console.log(`Yes for ${card.text}`)
+    handleYup = (card) => {
+      var addInterest = "";
+      if(card.MainCategoryID!=undefined){
+        addInterest = JSON.stringify({
+          "token": this.state.data.token,
+          "username" : this.state.data.username,
+          "subID": card.ID
+        })
+      }else if(card.SubCategoryID!=undefined){
+        addInterest = JSON.stringify({
+          "token": this.state.data.token,
+          "username" : this.state.data.username,
+          "subSubID": card.ID
+        })
+      }else{
+        addInterest = JSON.stringify({
+          "token": this.state.data.token,
+          "username" : this.state.data.username,
+          "mainID": card.ID
+        })
+      }
+      fetch('http://192.168.1.10:8080/user/interest',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: addInterest
+      })
+      fetch('http://192.168.1.10:8080/user/randominterest',{
+          method: 'POST',
+          headers:{
+              'Content-Type':'application/json',
+          },
+          body: JSON.stringify({
+              "token": this.state.data.token,
+              "username":this.state.data.username
+          })
+      }).then((response)=>{
+          return response.json();
+      }).then((responseJSON)=>{
+          console.log(responseJSON);
+          if(responseJSON.MainCategoryID!=undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID}
+            ]
+          }else if(responseJSON.SubCategoryID!=undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID}
+            ]
+          }else if(responseJSON.SubSubCategory != undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID}
+            ]
+          }
+          this.forceUpdate();
+          //this.props.navigation.navigate('Match', {data:this.state});
+      }).catch((err)=>{
+          console.log(err);
+      })
+      //console.log(`Yes for ${card.text}, ${card.id}`)
     }
-    handleNope (card) {
-        console.log(`No for ${card.text}`)
+    handleNope = (card) => {
+      fetch('http://192.168.1.10:8080/user/randominterest',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+            "token": this.state.data.token,
+            "username":this.state.data.username
+        })
+      }).then((response)=>{
+          return response.json();
+      }).then((responseJSON)=>{
+          console.log(responseJSON);
+          if(responseJSON.MainCategoryID!=undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', MainCategoryID:responseJSON.MainCategoryID, ID: responseJSON.ID}
+            ]
+          }else if(responseJSON.SubCategoryID!=undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubCategoryID:responseJSON.SubCategoryID, ID: responseJSON.ID}
+            ]
+          }else if(responseJSON.SubSubCategory != undefined){
+            this.state.cards = [
+              {text: responseJSON.Name, backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID},
+              {text: "", backgroundColor: 'purple', SubSubCategory:responseJSON.SubSubCategory, ID: responseJSON.ID}
+            ]
+          }
+          this.forceUpdate();
+          //this.props.navigation.navigate('Match', {data:this.state});
+      }).catch((err)=>{
+          console.log(err);
+      })
     }
 
 
     render() {
-        return (
-            <LinearGradient
-                colors={['#024757', '#00c5d0']}
-                start={{x: 1, y: 0}}
-                end={{x: 0, y: 1}}
-                style={{flex: 1}}>
-                /*
-                <View style={imgStyle.imgPos}>
-                    <Image style={imgStyle.image}
-                           source={require('../assets/crowd_logo.png')}/>
-                </View>
-
-                 */
-                <SwipeCards
-                    cards={this.state.cards}
-                    renderCard={(cardData) => <Card {...cardData} />}
-                    renderNoMoreCards={() => <NoMoreCards />}
-                    handleYup={this.handleYup}
-                    handleNope={this.handleNope}
-                />
-            </LinearGradient>
-        )
+      return (
+          <LinearGradient
+              colors={['#024757', '#00c5d0']}
+              start={{x: 1, y: 0}}
+              end={{x: 0, y: 1}}
+              style={{flex: 1}}>
+              <View style={imgStyle.imgPos}>
+                  <Image style={imgStyle.image}
+                          source={require('../assets/crowd_logo.png')}/>
+              </View>
+              <SwipeCards
+                  cards={this.state.cards}
+                  renderCard={(cardData) => <Card {...cardData} />}
+                  renderNoMoreCards={() => <NoMoreCards />}
+                  handleYup={this.handleYup}
+                  handleNope={this.handleNope}
+              />
+          </LinearGradient>
+      )
     }
     routeHome= ()=> {
         this.navigation.navigate('home')

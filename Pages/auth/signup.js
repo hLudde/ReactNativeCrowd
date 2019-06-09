@@ -179,7 +179,7 @@ export default class signup extends Component {
     }
     signUp = () => {
         console.log("Hello world!");
-        return fetch('http://10.32.9.62:8080/register',{
+        return fetch('http://192.168.1.10:8080/register',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json',
