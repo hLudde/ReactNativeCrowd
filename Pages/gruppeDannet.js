@@ -84,11 +84,11 @@ export default class gruppeDannet extends Component {
             <View style={[styles.parentView]}>
                 <View>
                     <Text style={textStyle.overText}>Et nytt</Text>
-                   /* <View style={imgStyle.imgPos}>
+                   /<View style={imgStyle.imgPos}>
                         <Image style={imgStyle.image}
                                source={require('../assets/crowd_logo.png')}/>
                     </View>
-                    */
+
 
                     <Text style={textStyle.underText}>Er dannet!</Text>
                 </View>

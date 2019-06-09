@@ -5,14 +5,14 @@ import {LinearGradient} from 'expo';
 
 const styles = StyleSheet.create({
     parentView: {
-        paddingTop: 160,
+        paddingTop: 150,
     },
     loggInnStyle:{
         color: '#024757',
         textAlign: 'center',
         fontSize: 30,
         marginTop: 20,
-        marginBottom: 50,
+        marginBottom: 30,
     },
     textInputStyle: {
         padding: 9,  // placholder position
@@ -24,32 +24,29 @@ const styles = StyleSheet.create({
         backgroundColor: 'white', // colour inside the text input field
         borderRadius: 5,
     },
-
     submitButton: {
         backgroundColor: '#024757',
-        padding: 13,
-        margin: 10,
-        height: 60,
-        marginLeft: 65,
-        marginRight: 65,
-        borderRadius: 5,
+        padding: 15,
+        margin: 20,
+        height: 50,
+        width: 120,
+        alignContent: 'center',
+        justifyContent:'center',
+        marginLeft: 100,
+        borderRadius: 50/2,
     },
     submitButtonText: {
         color: 'white',
         textAlign: 'center',
-        paddingTop: 8
+
     },
     backText: {
         color: '#FFFFFF',
         textAlign: 'center',
+        alignContent: 'center',
+        justifyContent:'center',
         margin: 70,
         marginTop: 3,
-    },
-    routeText: {
-        margin: 5,
-        paddingTop: 5,
-        color: 'white',
-        textAlign: 'center'
     },
     routeSignUp: {
         margin: 5,
@@ -57,7 +54,6 @@ const styles = StyleSheet.create({
         color: '#000000',
         paddingLeft: '38%'
     },
-
 });
 
 export default class login extends Component {
@@ -103,7 +99,7 @@ export default class login extends Component {
                     </View>
                     <View>
 
-                        <Text style={[styles.loggInnStyle]}>Logg inn</Text>
+                        <Text style={[styles.loggInnStyle]}>Login</Text>
                         <TextInput style={[styles.textInputStyle]}
                                    placeholder="Brukernavn"
                                    value={this.state.placeholder}
@@ -118,22 +114,14 @@ export default class login extends Component {
                                    onChangeText={this.handlePassword}/>
                     </View>
 
-
                     <TouchableOpacity style={styles.submitButton}
                                       onPress={this.signIn}>
-                        <Text style={styles.submitButtonText}> Logg inn </Text>
+                        <Text style={styles.submitButtonText}> Login</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={this.routeHome}>
                         <Text style={styles.backText}> Hjem</Text>
-                    </TouchableOpacity>
-
-                    <Text style={[styles.routeText]}> Ikke medlem enda? </Text>
-
-                    <TouchableOpacity
-                        onPress={this.routeSignUp}>
-                        <Text style={styles.routeSignUp}> Registrér deg </Text>
                     </TouchableOpacity>
 
                 </View>
