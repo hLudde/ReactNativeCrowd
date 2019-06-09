@@ -48,8 +48,10 @@ export default class groups extends Component {
         query: '',
         groupName: '',
     };
+    
 
     render() {
+        
         const {query} = this.state;
         return (
             <ScrollView style={{flexDirection:'column',flex:1,paddingTop: 20,padding: 20}}>
