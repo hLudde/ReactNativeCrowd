@@ -4,6 +4,7 @@ import {LinearGradient} from 'expo';
 
 const styles = StyleSheet.create({
     parentView: {
+        marginTop: 25,
     },
     textInputStyle: {
         padding: 10, // placholder position
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         color: '#024757',
         textAlign: 'center',
         fontSize: 30,
-        marginBottom: 30,
+        paddingBottom: 10,
         //fontFamily: "./assets/fonts/Roboto-Bold.ttf"// "Roboto-Light"
     },
     star: {
@@ -35,13 +36,17 @@ const styles = StyleSheet.create({
         padding: 15,
         margin: 20,
         height: 50,
-        marginLeft: 115,
-        marginRight: 115,
-        borderRadius: 30,
+        width: 120,
+        alignContent: 'center',
+        justifyContent:'center',
+        marginLeft: 100,
+        borderRadius: 50/2,
+        marginBottom: 10,
     },
     backText: {
-        color: '#000000',
+        color: 'white',
         textAlign: 'center',
+        marginBottom: 45,
     },
     submitButtonText: {
         color: 'white',
@@ -89,17 +94,7 @@ export default class signup extends Component {
                 end={{ x: 0, y: 1 }}
                 style={{ flex: 1 }}>
                 <ScrollView style={[styles.parentView]}>
-                    <View style={{ flex: 1 }}>
-                        <Image
-                            source={pic}
-                            style={[
-                                { width: 310, height: 135 },
-                                { resizeMode: 'center' },
-                                { top: -120 },
-                                { left: '11%' },
-                            ]}
-                        />
-                    </View>
+
                     <View>
                         <Text style={[styles.signUpText]}>Registrering</Text>
                         <Text style={[styles.overText]}>
@@ -167,7 +162,7 @@ export default class signup extends Component {
                     </View>
 
                     <TouchableOpacity style={styles.submitButton} onPress={this.signUp}>
-                        <Text style={styles.submitButtonText}> Registrér deg </Text>
+                        <Text style={styles.submitButtonText}> Register </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.routeHome}>
