@@ -66,12 +66,12 @@ export default class profilePage extends Component {
                 <View style={[styles.parentView]}>
 
                     <Text style={textStyle.overText}> Brukernavn/navn </Text>
-
+                    /*
                     <View style={imgStyle.imgPos}>
                         <Image style={imgStyle.image}
-                               source={require('./assets/avatar.png')}/>
+                               source={require('../assets/crowd_logo.png')}/>
                     </View>
-
+                    */
                     <TouchableOpacity style={styles.submitButton} onPress={this.routeUpdateProfile}>
                         <Text style={styles.submitButtonText}> Oppdater profil </Text>
                     </TouchableOpacity>

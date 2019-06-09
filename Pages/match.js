@@ -69,11 +69,13 @@ export default class extends React.Component {
                 start={{x: 1, y: 0}}
                 end={{x: 0, y: 1}}
                 style={{flex: 1}}>
-
+                /*
                 <View style={imgStyle.imgPos}>
                     <Image style={imgStyle.image}
-                           source={require('./assets/crowd_logo.png')}/>
+                           source={require('../assets/crowd_logo.png')}/>
                 </View>
+
+                 */
                 <SwipeCards
                     cards={this.state.cards}
                     renderCard={(cardData) => <Card {...cardData} />}
