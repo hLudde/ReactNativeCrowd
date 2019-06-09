@@ -23,7 +23,7 @@ export default class Crowd extends Component {
             <TouchableOpacity style={styles.button} onPress={this.signIn}><Text style={styles.buttonText}>Logg Inn</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={this.doSignUp}><Text style={styles.buttonText}>Ny Bruker</Text></TouchableOpacity>
         </View>
-      </ImageBackground>
+      </ImageBackground> 
     );
   }
   signIn = () => {
@@ -31,6 +31,9 @@ export default class Crowd extends Component {
   };
   doSignUp = () => {
     this.props.navigation.navigate('signUp');
+  }
+  TEMPChat = () => {
+    this.props.navigation.navigate('chat');
   }
 }
 const styles = StyleSheet.create({
