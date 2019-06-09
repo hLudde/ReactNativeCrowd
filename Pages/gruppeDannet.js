@@ -1,126 +1,113 @@
-import React, {Component} from "react";
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
-import {Searchbar} from 'react-native-paper';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, Image, Button, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
-    flexBox: {
-        backgroundColor:'#C9F4FA',
-        flex: 1,
-        height: 120,
-        width: 100,
+    parentView: {
+
+    },
+    submitButton: {
+        backgroundColor: '#024757',
+        marginTop: 20,
+        height: 60,
+        marginLeft: 65,
+        borderRadius:60,
+        width: 200,
+        alignContent: 'center',
+        justifyContent:'center',
+    },
+    submitButtonText: {
+        color: 'white',
+        textAlign: 'center',
+        justifyContent:'center',
+        fontSize: 16
+    },
+    backText: {
+        marginTop: 15,
+        color: '#b0c4de',
+        textAlign: 'center'
+    },
+    circle: {
+        height: 260,
+        width: 260,
+        borderRadius: 260/2,
+        backgroundColor: '#dcdcdc',
+        alignItems: 'center',
+        marginLeft: 32.5,
+        marginTop: 15,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 3,
+            height: 10,
         },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 6,
+        shadowOpacity: 0.34,
+        shadowRadius: 10.00,
+        elevation: 10
     },
-    flexStyle: {
-        flex:1,
-        flexDirection:"row",
-        justifyContent:'space-between',
-        paddingBottom:20,
-    },
-    circle: {
-        height: 80,
-        width: 80,
-        borderRadius: 80/2,
-        backgroundColor: '#00c5d0',
-        position: 'absolute',
-        marginLeft: 28,
-        marginTop: 32,
-    },
-    textStyle: {
-        paddingTop: 10,
-        fontSize: 14,
-        fontWeight: 'bold',
+});
+const textStyle = StyleSheet.create({
+    overText: {
+        color: '#024757',
+        fontSize: 18,
         textAlign: 'center',
+        marginTop: 5,
+    },
+    underText: {
+        color: '#024757',
+        fontSize: 18,
+        textAlign: 'center',
+        marginTop: -5
     }
 });
+const imgStyle = StyleSheet.create({
+    image: {
+        height: 67,
+        width: 200,
+    },
+    imgPos: {
+        alignItems: 'center',
+        marginTop: -5,
 
-export default class groups extends Component {
+    },
+});
+
+export default class gruppeDannet extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
+
     state = {
-        query: '',
-        groupName: '',
-    };
+        interestName: ''
+    }
 
     render() {
-        const {query} = this.state;
         return (
-            <ScrollView style={{flexDirection:'column',flex:1,paddingTop: 30,padding: 20}}>
-
+            <View style={[styles.parentView]}>
                 <View>
-                    <View style={{paddingBottom:25, marginHorizontal: 70}}>
-                        <Searchbar
-                            placeholder="Search"
-                            onChangeText={query => { this.setState({ query: query }); }}
-                            value={query}
-                        />
+                    <Text style={textStyle.overText}>Et nytt</Text>
+                    <View style={imgStyle.imgPos}>
+                        <Image style={imgStyle.image}
+                               source={require('./assets/crowd_logo.png')}/>
                     </View>
+                    <Text style={textStyle.underText}>Er dannet!</Text>
+                </View>
+                <View style={[styles.circle]}>
                 </View>
 
-                <View style={styles.flexStyle}>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> Superkoderne </Text>
-                        </TouchableOpacity>
-                    </View>
+                <TouchableOpacity style={styles.submitButton} onPress={this.routeGroup}>
+                    <Text style={styles.submitButtonText}>Mine interesser</Text>
+                </TouchableOpacity>
 
-                    <View style={{flex:0.1}}/>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> Vingjengen </Text>
-                        </TouchableOpacity>
-                    </View>
+                <TouchableOpacity onPress={this.routeHome}>
+                    <Text style={styles.backText}>Tilbake</Text>
+                </TouchableOpacity>
 
-                </View>
-                <View style={styles.flexStyle}>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> RDR2 </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{flex:0.1}}/>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> Ølgutta </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
-                <View style={styles.flexStyle}>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> Sjakk4Life </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{flex:0.1}}/>
-                    <View style={styles.flexBox}>
-                        <TouchableOpacity>
-                            <View style={[styles.flexBox,styles.circle]}>
-                            </View>
-                            <Text style = {styles.textStyle}> SQL </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
-            </ScrollView>
+            </View>
         );
     }
+    routeGroup= () => {
+        this.props.navigation.navigate('groups');
+    };
+    routeHome = () => {
+        this.props.navigation.navigate('home');
+    };
 }

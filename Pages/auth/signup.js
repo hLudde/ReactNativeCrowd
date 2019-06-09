@@ -205,10 +205,8 @@ export default class signup extends Component {
         })
     };
 
-
     routeHome = () => {
         this.props.navigation.navigate('home');
     };
-
 
 }

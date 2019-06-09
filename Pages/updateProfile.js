@@ -1,5 +1,5 @@
-import React,{Component} from "react";
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
+import React, {Component} from "react";
+import {StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
 import {LinearGradient} from 'expo';
 
 const styles = StyleSheet.create({
@@ -19,8 +19,10 @@ const styles = StyleSheet.create({
         color: '#024757',
         textAlign: 'center',
         fontSize: 30,
+        fontWeight: 'bold',
         fontFamily: "./assets/fonts/Roboto-Bold.ttf",// "Roboto-Light"
-        paddingBottom: 10,
+        paddingTop: 25,
+        paddingBottom: 25,
     },
     overText: {
         color: '#024757',
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
         margin: 10,
         height: 60,
         width: 125,
-        marginLeft: 100,
+        marginLeft: 125,
         alignContent: 'center',
         justifyContent:'center',
         borderRadius: 60/2,
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
     updateButtonText: {
         color: 'white',
         textAlign: 'center',
+        fontSize: 16
     },
 });
 
@@ -161,20 +164,31 @@ export default class updateProfile extends Component {
                         />
                     </View>
 
-                    <TouchableOpacity style={styles.updateButton} onPress={this.signUp}>
+                    <TouchableOpacity style={styles.updateButton} onPress={this.doUpdate}>
                         <Text style={styles.updateButtonText}> Oppdater </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.routeHome}>
-                        <Text style={styles.backText}> Hjem</Text>
+                    <TouchableOpacity onPress={this.routeProfilePage}>
+                        <Text style={styles.backText}> Tilbake</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </LinearGradient>
         );
     }
-    signUp = async () => {
-        const { username, email, password, confirm } = this.state;
-
+    doUpdate = () => {
+        return fetch('http://10.32.9.62:8080/register',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({
+                "email": this.state.email,
+                "password": this.state.password,
+                "name": this.state.name,
+                "username":this.state.username
+            })
+        })
+        /*
         if (
             username === '' &&
             password === '' &&
@@ -193,9 +207,10 @@ export default class updateProfile extends Component {
         } else {
             //login til home
         }
+        */
     };
 
-    routeHome = () => {
-        this.props.navigation.navigate('home');
+    routeProfilePage = () => {
+        this.props.navigation.navigate('profilePage');
     };
 }

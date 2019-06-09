@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView} from "react-native";
 import {Searchbar} from 'react-native-paper';
 
 const styles = StyleSheet.create({
@@ -55,7 +55,7 @@ export default class groups extends Component {
             <ScrollView style={{flexDirection:'column',flex:1,paddingTop: 20,padding: 20}}>
 
                 <View>
-                    <View style={{paddingBottom:25, marginHorizontal: 70}}>
+                    <View style={{paddingBottom:25, width: 230, marginHorizontal: 100}}>
                         <Searchbar
                             placeholder="Search"
                             onChangeText={query => { this.setState({ query: query }); }}

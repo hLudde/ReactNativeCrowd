@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     submitButtonText: {
         color: 'white',
         textAlign: 'center',
+        fontSize: 16
     },
 });
 const textStyle = StyleSheet.create({
@@ -42,6 +43,7 @@ const imgStyle = StyleSheet.create({
     image: {
         height: 180,
         width: 180,
+        borderRadius: 180/2
     },
     imgPos: {
         alignItems: 'center',
@@ -67,11 +69,11 @@ export default class profilePage extends Component {
 
                     <View style={imgStyle.imgPos}>
                         <Image style={imgStyle.image}
-                               source={require('../assets/avatar.png')}/>
+                               source={require('./assets/avatar.png')}/>
                     </View>
 
                     <TouchableOpacity style={styles.submitButton} onPress={this.routeUpdateProfile}>
-                        <Text style={styles.submitButtonText}> OPPDATER PROFIL </Text>
+                        <Text style={styles.submitButtonText}> Oppdater profil </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.routeHome}>
@@ -83,9 +85,9 @@ export default class profilePage extends Component {
         );
     }
     routeUpdateProfile= () => {
-        this.props.navigation.navigate('updateProfile');
+        this.props.navigation.navigate('home');
     };
     routeHome = () => {
-        this.props.navigation.navigate('home');
+        this.props.navigation.navigate('updateProfile');
     };
 }

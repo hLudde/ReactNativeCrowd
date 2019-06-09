@@ -9,6 +9,7 @@ import Match from './Pages/match';
 import profilePage from './Pages/profilePage'
 import groups from './Pages/groups';
 import updateProfile from './Pages/updateProfile'
+import gruppeDannet from './Pages/gruppeDannet'
 
 export const api = React.createContext("http://10.32.9.62/");
 // NAVIGATION DRAWER IN HEADER
@@ -37,7 +38,7 @@ const Match_StackNavigator = createStackNavigator({
     First: {
         screen: Match,
         navigationOptions: ({ navigation }) => ({
-            title: 'Interesser',
+            title: 'Finn Interesser',
             headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
             headerStyle: {
                 backgroundColor: '#FF9800',
@@ -73,6 +74,7 @@ const groups_StackNavigator = createStackNavigator({
     },
 });
 
+
 // sider som skal være med i stacken her
 const DrawerNavigator = createDrawerNavigator({
     //Drawer Optons og indexing
@@ -85,7 +87,6 @@ const DrawerNavigator = createDrawerNavigator({
         }
     },
     Match: {
-        //Title
         screen: Match_StackNavigator,
         navigationOptions: {
             drawerLabel: 'Match',
@@ -103,8 +104,7 @@ const DrawerNavigator = createDrawerNavigator({
             drawerLabel: 'Mine Grupper',
         },
     },
-
-
+    // ikke med i drawer stacken
     login: {
         screen: Login,
         navigationOptions: ({navigation}) => {
@@ -134,10 +134,15 @@ const DrawerNavigator = createDrawerNavigator({
             return {
                 drawerLabel: () => null,
             }
+        }},
+    gruppeDannet: {
+        screen:gruppeDannet,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
         }}
+
 });
 
-
 export default createAppContainer(DrawerNavigator);
-
-
