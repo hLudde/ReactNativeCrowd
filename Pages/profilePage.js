@@ -77,7 +77,7 @@ export default class profilePage extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.routeHome}>
-                        <Text style={styles.backText}>Hjem</Text>
+                        <Text style={styles.backText}>Logg av</Text>
 
                     </TouchableOpacity>
                 </View>
@@ -88,6 +88,6 @@ export default class profilePage extends Component {
         this.props.navigation.navigate('updateProfile');
     };
     routeHome = () => {
-        this.props.navigation.navigate('Match');
+        this.props.navigation.navigate('home');
     };
 }
