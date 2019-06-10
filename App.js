@@ -10,6 +10,7 @@ import profilePage from './Pages/profilePage'
 import groups from './Pages/groups';
 import updateProfile from './Pages/updateProfile'
 import gruppeDannet from './Pages/gruppeDannet'
+import Chat from './Pages/chat'
 
 
 export const api = React.createContext("http://10.32.9.62/");
@@ -144,6 +145,13 @@ const DrawerNavigator = createDrawerNavigator({
         }},
     gruppeDannet: {
         screen:gruppeDannet,
+        navigationOptions: ({navigation}) => {
+            return {
+                drawerLabel: () => null,
+            }
+        }},
+    chat: {
+        screen:Chat,
         navigationOptions: ({navigation}) => {
             return {
                 drawerLabel: () => null,

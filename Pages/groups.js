@@ -50,6 +50,9 @@ export default class groups extends Component {
     };
     
 
+    loadChat = () =>{
+        this.props.navigation.navigate('chat');
+    }
     render() {
         
         const {query} = this.state;
@@ -68,7 +71,7 @@ export default class groups extends Component {
 
                 <View style={styles.flexStyle}>
                     <View style={styles.flexBox}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={this.loadChat}>
                             <View style={[styles.flexBox,styles.circle]}>
                             </View>
                             <Text style = {styles.textStyle}> Superkoderne </Text>

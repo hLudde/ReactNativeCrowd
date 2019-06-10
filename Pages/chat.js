@@ -4,7 +4,7 @@ import { GiftedChat } from "react-native-gifted-chat";
 import io from 'socket.io-client';
 //import console = require("console");
 
-const socketID = 'http://10.32.9.27:8080';
+const socketID = 'http://192.168.1.10:8080';
 const userID = 2;
 
 export default class Chat extends Component {
@@ -49,7 +49,7 @@ export default class Chat extends Component {
     
   }
   home = () => {
-    this.props.navigation.navigate('home');
+    this.props.navigation.navigate('Grupper');
   }
   render() {
     return (

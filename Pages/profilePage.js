@@ -85,9 +85,9 @@ export default class profilePage extends Component {
         );
     }
     routeUpdateProfile= () => {
-        this.props.navigation.navigate('home');
+        this.props.navigation.navigate('updateProfile');
     };
     routeHome = () => {
-        this.props.navigation.navigate('updateProfile');
+        this.props.navigation.navigate('Match');
     };
 }
