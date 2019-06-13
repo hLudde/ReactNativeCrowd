@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold',
-        fontFamily: "./assets/fonts/Roboto-Bold.ttf",// "Roboto-Light"
+        //fontFamily: "./assets/fonts/Roboto-Bold.ttf",// "Roboto-Light"
         paddingTop: 25,
         paddingBottom: 25,
     },
@@ -176,7 +176,7 @@ export default class updateProfile extends Component {
         );
     }
     doUpdate = () => {
-        return fetch('http://10.32.9.62:8080/register',{
+        return fetch('http://10.32.9.7:8080/register',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json',
